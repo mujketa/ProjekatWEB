@@ -4,20 +4,40 @@
     padding: 0;
 }
 
-
-body {
-    background-image: linear-gradient(180deg, rgb(185, 40, 40), rgb(121, 17, 17) 100px, rgb(95, 34, 34));
-  }
-  .container {
-    max-width: 960px;
-    background-color: bisque;
-  }
-
-  #foods-row{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+body{
+    font-family: "Montserrat";
 }
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat";
+}
+h3{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+h2{
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 1.5;
+}
+p{
+    color: #8f8f8f;
+}
+/* headings*/
+.big-heading{
+    font-family: 'Montserrat';  
+    font-size: 3rem;  line-height: 1.5;  
+    font-weight: 900;
+} 
+#title{
+    background-color: #e79d12;
+    color: #fff;
+}
+.container-fluid{
+    padding: 3% 15% 7%;
+}
+
+/* Navigation Bar (logo)*/
 
 .navbar-brand{
     font-family: "Ubuntu";
@@ -38,4 +58,71 @@ body {
 }
 .navbar-nav{
     padding-left: 40rem;
+}
+
+/* Download Buttons */
+
+.download-button{
+    /* malo da odmaknem buttone od texta i slike */
+    margin: 5% 3% 5% 0%;
+}
+
+/* Title image */
+.title-image{
+    width: 80%;
+    position: absolute;
+    right: -30%;
+}
+
+/* Features section */
+#foods{
+    /* top bottom i left right */
+    padding: 5% 25%; 
+    background-color: #fff;
+}
+.feature-box{
+    text-align: center;
+    padding: 7%;
+}
+
+/* cta section */
+
+#visit{
+    background-color: #e79d12;
+    color: #fff;
+    padding: 7% 15%;
+    text-align: center;
+}
+.visit-heading{
+    font-family: "Montserrat";
+    font-size: 3.5rem;
+    line-height: 1.5; 
+}
+/* footer section */
+#footer{
+    padding: 7% 15%;
+    text-align: center;
+}
+.social-icon{
+    margin:20px 10px;
+}
+
+@media (max-width: 1028px ){
+    #title{
+        text-align: center;
+    }
+    .title-image{
+        position: static;
+    }
+}
+/* add food button */
+.center {
+    margin-top: 5%;
+    width: 40%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hideform {
+    display: none;
 }

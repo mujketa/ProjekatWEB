@@ -29,13 +29,24 @@ const renderFoods = (foods) => {
                 <h5 class="card-title">${food.name}</h5>
                 <p class="card-text">${food.price}KM</p>
                 <button type="button" onclick="fillEditData(${food.id})" class="btn btn-warning fillData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
-                <button type="button" onclick="deleteFood(${food.id})" class="btn btn-danger deleteData" >Delete</button>
+                <button type="button" onclick="deleteFood(${food.id})" class="btn btn-danger deleteData">Delete</button>
             </div>
         </div>
         `;
     });
 
     foodsRow.innerHTML = resultFoodsHtml;
+}
+
+const fetchFoods = () => {
+    fetch(`${BASE_URL}/api/Food`)
+    .then(res => {
+        return res.json();
+    })
+    .then(data => {
+        foods = data;
+        renderFoods(data);
+    });
 }
 
 const fillEditData = (foodId) => {
@@ -82,14 +93,36 @@ const editFood = () => {
 
 //DELETE
 
+// const deleteFood = async (id) => {
+//     fetch(`${BASE_URL}/foods/{${id}}`, {
+//         method: "DELETE",
+//     })
+//     .then(response => response.json())
+//    .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+//    .catch(err => console.log(err)) // Do something with the error
+
+// }
+
 const deleteFood = async (id) => {
-    await fetch(`${BASE_URL}/foods/{${id}}`, {
+    await fetch(`${BASE_URL}/api/Food/{${id}}`, {
         method: "DELETE",
     })
     .then(res => {
-        if (res.ok) {console.log("DELETE request successful")}
-        else { console.log("DELETE request unsuccessful")}
-        return res
+        if(!res.ok)
+        {
+            alert('Error');
+        }
     })
-
+    fetchFoods();
+    renderFoods(foods);
 }
+
+$('#show').on('click', function () {
+    $('.center').show();
+    $(this).hide();
+})
+
+$('#close').on('click', function () {
+    $('.center').hide();
+    $('#show').show();
+})
