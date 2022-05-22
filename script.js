@@ -4,6 +4,11 @@ let foods = [];
 
 fetch(`${BASE_URL}/api/Food`)
     .then(res => {
+        if (res.ok) {console.log("GET request successful")}
+        else { console.log("GET request unsuccessful")}
+        return res
+    })
+    .then(res => {
         return res.json();
     })
     .then(data => {
@@ -23,7 +28,8 @@ const renderFoods = (foods) => {
             <div class="card-body">
                 <h5 class="card-title">${food.name}</h5>
                 <p class="card-text">${food.price}KM</p>
-                <button type="button" onclick="fillEditData(${food.id})" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+                <button type="button" onclick="fillEditData(${food.id})" class="btn btn-warning fillData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+                <button type="button" onclick="deleteFood(${food.id})" class="btn btn-danger deleteData" >Delete</button>
             </div>
         </div>
         `;
@@ -45,13 +51,13 @@ const fillEditData = (foodId) => {
     foodFormPrice.value = food.price;
 }
 
+//PUT
 const editFood = () => { 
     const foodFormId = document.getElementById('food-id').value;
     const foodFormName = document.getElementById('food-name').value;
     const foodFormImage = document.getElementById('food-image').value;
     const foodFormPrice = document.getElementById('food-price').value;
-    
-//PUT
+
     fetch(`${BASE_URL}/api/Food`, {
         method: 'PUT', 
         headers: new Headers({'content-type': 'application/json'}),
@@ -68,4 +74,22 @@ const editFood = () => {
             alert('Error');
         }
     })
+        .then(res => {
+        return res.json();
+    })
+    .catch(error => console.log(error))
+}
+
+//DELETE
+
+const deleteFood = async (id) => {
+    await fetch(`${BASE_URL}/foods/{${id}}`, {
+        method: "DELETE",
+    })
+    .then(res => {
+        if (res.ok) {console.log("DELETE request successful")}
+        else { console.log("DELETE request unsuccessful")}
+        return res
+    })
+
 }
