@@ -2,6 +2,7 @@ const BASE_URL = "https://ptf-web-dizajn-2022.azurewebsites.net/";
 
 let foods = [];
 
+//GET
 fetch(`${BASE_URL}/api/Food`)
     .then(res => {
         if (res.ok) {console.log("GET request successful")}
@@ -36,17 +37,6 @@ const renderFoods = (foods) => {
     });
 
     foodsRow.innerHTML = resultFoodsHtml;
-}
-
-const fetchFoods = () => {
-    fetch(`${BASE_URL}/api/Food`)
-    .then(res => {
-        return res.json();
-    })
-    .then(data => {
-        foods = data;
-        renderFoods(data);
-    });
 }
 
 const fillEditData = (foodId) => {
@@ -90,21 +80,9 @@ const editFood = () => {
     })
     .catch(error => console.log(error))
 }
-
 //DELETE
-
-// const deleteFood = async (id) => {
-//     fetch(`${BASE_URL}/foods/{${id}}`, {
-//         method: "DELETE",
-//     })
-//     .then(response => response.json())
-//    .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
-//    .catch(err => console.log(err)) // Do something with the error
-
-// }
-
 const deleteFood = async (id) => {
-    await fetch(`${BASE_URL}/api/Food/{${id}}`, {
+    await fetch(`${BASE_URL}/api/Food/${id}`, {
         method: "DELETE",
     })
     .then(res => {
@@ -113,10 +91,37 @@ const deleteFood = async (id) => {
             alert('Error');
         }
     })
-    fetchFoods();
-    renderFoods(foods);
+    .then(response => response.json())
+   .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+   .catch(err => console.log(err)) // Do something with the error
 }
 
+//POST
+const addFood = async () => {
+    const foodFormId = document.getElementById('food--id').value;
+    const foodFormName = document.getElementById('food--name').value;
+    const foodFormImage = document.getElementById('food--image').value;
+    const foodFormPrice = document.getElementById('food--price').value;
+
+
+    await fetch(`${BASE_URL}/api/Food`, {
+        method: 'POST', 
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify({
+            id: foodFormId,
+            name: foodFormName,
+            imageUrl: foodFormImage,
+            price: foodFormPrice
+        })
+    })
+    .then(res => {
+        if(!res.ok){
+            alert('Error');
+        }
+    })
+}
+
+//Button SUBMIT u formi za POST
 $('#show').on('click', function () {
     $('.center').show();
     $(this).hide();
