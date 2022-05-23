@@ -75,14 +75,11 @@ const editFood = () => {
             alert('Error');
         }
     })
-        .then(res => {
-        return res.json();
-    })
     .catch(error => console.log(error))
 }
 //DELETE
-const deleteFood = async (id) => {
-    await fetch(`${BASE_URL}/api/Food/${id}`, {
+const deleteFood = (id) => {
+   fetch(`${BASE_URL}/api/Food/${id}`, {
         method: "DELETE",
     })
     .then(res => {
@@ -91,9 +88,7 @@ const deleteFood = async (id) => {
             alert('Error');
         }
     })
-    .then(response => response.json())
-   .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
-   .catch(err => console.log(err)) // Do something with the error
+   .catch(err => console.log(err)) 
 }
 
 //POST

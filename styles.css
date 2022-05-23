@@ -57,7 +57,7 @@ p{
     font-size: 1.2rem;
 }
 .navbar-nav{
-    padding-left: 40rem;
+    align-items: flex-end;
 }
 
 
@@ -121,10 +121,10 @@ p{
     display: none;
 }
 
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 1028px)
- {
+/* responsive */
+ 
+
+@media (max-width: 1028px){
     #title{
         text-align: center;
     }
@@ -137,6 +137,12 @@ p{
         text-align: center;
         margin-left: 6rem;
     }
-    
+    #foods-row{
+        /* top bottom i left right */
+        padding: 5% 15%; 
+    }
 }
+
+
+
 
